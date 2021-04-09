@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Spring核心配置文件-->
+
+    <!--bean標簽的基本配置-->
+    <!--  id=唯一性標識  class=全類名（反射構造） -->
+    <bean id="userDao" class="com.jackson.dao.impl.UserDaoImpl"/>
+
+    <!--  scope=作用範圍（singleton-單例的，prototype-多例的）  -->
+    <bean id="userDaoSingleton" class="com.jackson.dao.impl.UserDaoImpl" scope="singleton"/>
+    <bean id="userDaoPrototype" class="com.jackson.dao.impl.UserDaoImpl" scope="prototype"/>
+
+    <!--  InitMethod, DestroyMethod  -->
+    <bean id="userDaoInitDestroy" class="com.jackson.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy"/>
+
+    <!-- bead實例化的三種方法 -->
+    <!-- 無參構造，工廠靜態，工廠實例 -->
+    <!-- 工廠靜態： -->
+    <bean id="userDaoStatic" class="com.jackson.factory.StaticFactory" factory-method="getUserDao"/>
+
+    <!-- 工廠實例 -->
+    <bean id="userDaoDynamicFactory" class="com.jackson.factory.DynamicFactory"/>
+    <bean id="userDaoDynamic" factory-bean="userDaoDynamicFactory" factory-method="getUserDao"/>
+    
+    <!--  DI 依賴注入  -->
+    <bean id="userService" class="com.jackson.service.impl.UserServiceImpl">
+        <!--property 通過getter setter注入-->
+<!--        <property name="userDao" ref="userDao"/>-->
+
+        <!--constructor-arg 通過構造器注入-->
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+
+
+    <!--引入其他配置文件-->
+    <import resource="classpath:spring/applicationContext-*.xml"/>
+
+</beans>

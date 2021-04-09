@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean依賴注入的數據類型-->
+    <!--普通數據類型、引用數據類型、集合數據類型-->
+    <bean id="user" class="com.jackson.domain.User">
+        <property name="username" value="beenbeen"/>
+        <property name="age" value="18"/>
+        <property name="strings">
+            <list>
+                <value type="java.lang.String">abc</value>
+                <value type="java.lang.String">def</value>
+                <value type="java.lang.String">ghi</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="1" value="a"/>
+                <entry key="2" value="b"/>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="p1">properties 1</prop>
+                <prop key="p2">properties 2</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
