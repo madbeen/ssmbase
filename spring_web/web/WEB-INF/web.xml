@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+
+    <!--web工程的全局初始化參數-->
+    <!--自定義-->
+<!--    <context-param>-->
+<!--        <param-name>ContextConfigLocation</param-name>-->
+<!--        <param-value>applicationContext.xml</param-value>-->
+<!--    </context-param>-->
+    <!--spring-web-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+
+
+    <!--ServletContext Listener 監聽，服務器一啓動，加載Spring容器，獲取ApplicationContext對象，並存儲到ServletContext域中-->
+    <!--自定義-->
+<!--    <listener>-->
+<!--        <listener-class>com.jackson.listener.ContextLoaderListener</listener-class>-->
+<!--    </listener>-->
+    <!--spring-web-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    
+    
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.jackson.web.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
