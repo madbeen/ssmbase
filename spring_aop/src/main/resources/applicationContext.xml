@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--目标对象-->
+    <bean id="target" class="com.jackson.aop.impl.TargetImpl"/>
+
+    <!--切面对象-->
+    <bean id="myAspect" class="com.jackson.aop.MyAspect"/>
+
+    <!--织入: 告诉Spring，哪些方法需要哪些增强-->
+    <aop:config>
+        <!--切面：切点+通知-->
+        <aop:aspect ref="myAspect">
+            <!--抽取切点表达式-->
+            <aop:pointcut id="myPointcut" expression="execution(* com.jackson.aop.impl.*.*(..))"/>
+<!--            <aop:before method="beforeAdvice" pointcut="execution(* com.jackson.aop.impl.*(..))"/>-->
+            <aop:around method="aroundAdvice" pointcut-ref="myPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
